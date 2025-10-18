@@ -1,186 +1,73 @@
-<!DOCTYPE html>
-<html lang="hr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MI-KLESARSTVO</title>
-  <style>
-    :root {
-      --tamno-plava: #0b1e26;
-      --maslinasto-zelena: #2e4735;
-      --kamen-siva: #d4d4d4;
-      --naglasak: #5a7c69;
-      --tamno-siva: #09171b;
-    }
+<!-- Dodaj ovo odmah prije zatvaranja </body> -->
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: var(--tamno-plava);
-      color: var(--kamen-siva);
-    }
+<!-- Modal za povećanje slike -->
+<div id="modalSlika" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="slikaPovecana">
+</div>
 
-    header {
-      background: linear-gradient(180deg, var(--maslinasto-zelena), var(--tamno-plava));
-      color: white;
-      text-align: center;
-      padding: 50px 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
+<style>
+/* Modal stil */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 2.8em;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    }
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  margin-top: 50px;
+  border-radius: 6px;
+}
 
-    header p {
-      margin-top: 10px;
-      color: #cfd8d4;
-      font-size: 1.1em;
-    }
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    section {
-      padding: 50px 20px;
-      text-align: center;
-      background-color: #122d38;
-    }
+.close:hover {
+  color: #ccc;
+}
+</style>
 
-    section:nth-of-type(even) {
-      background-color: #183a46;
-    }
+<script>
+// Dohvati modal element i sliku unutar njega
+var modal = document.getElementById("modalSlika");
+var modalImg = document.getElementById("slikaPovecana");
+var closeBtn = document.getElementsByClassName("close")[0];
 
-    section h2 {
-      color: var(--naglasak);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 1.8em;
-      margin-bottom: 20px;
-    }
+// Dodaj klik za svaku sliku u galeriji
+var slikeGalerija = document.querySelectorAll(".galerija img");
+slikeGalerija.forEach(function(img){
+  img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+  }
+});
 
-    section p {
-      max-width: 800px;
-      margin: 10px auto;
-      line-height: 1.7;
-      font-size: 1.05em;
-      color: #e1e1e1;
-    }
+// Zatvori modal klikom na X
+closeBtn.onclick = function() {
+  modal.style.display = "none";
+}
 
-    /* ✅ Kompaktna galerija s malim kvadratnim slikama */
-    .galerija {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 10px;
-      padding: 25px;
-      background-color: #0f242d;
-      justify-items: center;
-    }
-
-    .galerija img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 6px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .galerija img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
-    }
-
-    /* Kontakt */
-    .kontakt {
-      background: linear-gradient(180deg, var(--maslinasto-zelena), var(--tamno-plava));
-      color: #fff;
-      padding: 50px 20px;
-      text-align: center;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .kontakt p {
-      margin: 8px 0;
-      font-size: 1.1em;
-    }
-
-    .btn-upit {
-      display: inline-block;
-      margin-top: 25px;
-      background-color: var(--naglasak);
-      color: white;
-      padding: 12px 25px;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn-upit:hover {
-      background-color: #4b6857;
-    }
-
-    footer {
-      text-align: center;
-      background-color: var(--tamno-siva);
-      color: #ccc;
-      padding: 20px 0;
-      font-size: 0.9em;
-      letter-spacing: 0.5px;
-      border-top: 1px solid #333;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>MI-KLESARSTVO</h1>
-    <p>Tradicionalna obrada kamena — preciznost, kvaliteta i povjerenje</p>
-  </header>
-
-  <section>
-    <h2>O nama</h2>
-    <p>
-      MI-KLESARSTVO je obiteljski obrt s dugogodišnjim iskustvom u obradi i oblikovanju kamena.
-      Naš rad odlikuju preciznost, kvaliteta i osjećaj za detalj. Kombiniramo tradicionalne metode s modernim alatima
-      kako bismo isporučili proizvode koji traju generacijama.
-    </p>
-  </section>
-
-  <section>
-    <h2>Naša ponuda</h2>
-    <p>➤ Kameni stolovi i klupe — ručna izrada s prirodnim uzorcima kamena</p>
-    <p>➤ Potprozornjaci, stepenice i obloge — precizna izrada i dugotrajnost</p>
-    <p>➤ Kameni satovi i dekorativni elementi — unikatni dizajn</p>
-    <p>➤ Spomenici i nadgrobni elementi — izrada po mjeri i želji kupca</p>
-    <p>➤ Ostali kameni proizvodi po narudžbi — prema vašim idejama i potrebama</p>
-  </section>
-
-  <section>
-    <h2>Galerija radova</h2>
-    <div class="galerija">
-      <img src="images/IMG-20250723-WA0003.jpg" alt="Rad 1" />
-      <img src="images/IMG-20250723-WA0004.jpg" alt="Rad 2" />
-      <img src="images/IMG-20251015-WA0047.jpg" alt="Rad 3" />
-      <img src="images/IMG-20251015-WA0048.jpg" alt="Rad 4" />
-      <img src="images/IMG-20251015-WA0051.jpg" alt="Rad 5" />
-      <img src="images/IMG-20251015-WA0052.jpg" alt="Rad 6" />
-      <img src="images/IMG-20251015-WA0054.jpg" alt="Rad 7" />
-      <img src="images/IMG-20251015-WA0056.jpg" alt="Rad 8" />
-      <img src="images/IMG-20251015-WA0059.jpg" alt="Rad 9" />
-      <img src="images/IMG-20251015-WA0060.jpg" alt="Rad 10" />
-      <img src="images/IMG-20251015-WA0062.jpg" alt="Rad 11" />
-      <img src="images/IMG-20251015-WA0063.jpg" alt="Rad 12" />
-      <img src="images/IMG-20251015-WA0064.jpg" alt="Rad 13" />
-    </div>
-  </section>
-
-  <div class="kontakt">
-    <h2>Kontakt</h2>
-    <p>📞 Telefon: <strong>+385 92 151 1159</strong></p>
-    <p>✉️ E-mail: <strong>miklesarstvo@gmail.com</strong></p>
-    <a href="#" class="btn-upit">Pošaljite upit</a>
-  </div>
-
-  <footer>© 2025 MI-KLESARSTVO | Sva prava pridržana</footer>
-</body>
-</html>
+// Zatvori modal klikom izvan slike
+modal.onclick = function(event){
+  if(event.target == modal){
+    modal.style.display = "none";
+  }
+}
+</script>
