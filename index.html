@@ -67,26 +67,27 @@
       color: #e1e1e1;
     }
 
-    /* ✅ Nova galerija (grid stil, bez animacija) */
+    /* ✅ Kompaktna galerija s malim kvadratnim slikama */
     .galerija {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 15px;
-      padding: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      padding: 25px;
       background-color: #0f242d;
+      justify-items: center;
     }
 
     .galerija img {
-      width: 100%;
-      height: 220px;
+      width: 100px;
+      height: 100px;
       object-fit: cover;
-      border-radius: 8px;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border-radius: 6px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .galerija img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      transform: scale(1.1);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
     }
 
     /* Kontakt */
