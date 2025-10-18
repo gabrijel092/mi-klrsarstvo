@@ -69,18 +69,19 @@ section p {
   font-size:1.05em;
 }
 
+/* --- Flex galerija --- */
 .galerija {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap:15px;
   padding:20px;
-  justify-items:center;
 }
 
 .galerija img {
   width:120px;
   height:120px;
-  object-fit:cover;
+  object-fit: cover;
   border-radius:10px;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor:pointer;
@@ -105,6 +106,7 @@ section p {
   border-radius:15px;
 }
 
+/* --- Kontakt --- */
 .kontakt {
   background: linear-gradient(135deg, #111827, #1f2937);
   padding:60px 20px;
@@ -230,6 +232,14 @@ footer {
     <img src="images/IMG-20251015-WA0047.jpg" alt="Rad 3">
     <img src="images/IMG-20251015-WA0048.jpg" alt="Rad 4">
     <img src="images/IMG-20251015-WA0051.jpg" alt="Rad 5">
+    <img src="images/IMG-20251015-WA0052.jpg" alt="Rad 6">
+    <img src="images/IMG-20251015-WA0054.jpg" alt="Rad 7">
+    <img src="images/IMG-20251015-WA0056.jpg" alt="Rad 8">
+    <img src="images/IMG-20251015-WA0059.jpg" alt="Rad 9">
+    <img src="images/IMG-20251015-WA0060.jpg" alt="Rad 10">
+    <img src="images/IMG-20251015-WA0062.jpg" alt="Rad 11">
+    <img src="images/IMG-20251015-WA0063.jpg" alt="Rad 12">
+    <img src="images/IMG-20251015-WA0064.jpg" alt="Rad 13">
   </div>
 </section>
 
@@ -247,7 +257,7 @@ footer {
   <div class="modal-content-form">
     <span class="close-form">&times;</span>
     <h2>Pošaljite poruku</h2>
-    <form action="https://formspree.io/f/mnqwyzvl" method="POST"> <!-- zamijeni sa svojim Formspree linkom -->
+    <form action="https://formspree.io/f/mnqwyzvl" method="POST">
       <input type="text" name="name" placeholder="Vaše ime" required><br>
       <input type="email" name="_replyto" placeholder="Vaš email" required><br>
       <textarea name="message" placeholder="Vaša poruka" rows="5" required></textarea><br>
