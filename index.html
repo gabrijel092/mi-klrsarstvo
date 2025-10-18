@@ -129,6 +129,9 @@
       border-radius: 6px;
       font-weight: bold;
       transition: background-color 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1em;
     }
 
     .btn-upit:hover {
@@ -143,6 +146,55 @@
       font-size: 0.9em;
       letter-spacing: 0.5px;
       border-top: 1px solid #333;
+    }
+
+    /* Modal forma */
+    .modal-form {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content-form {
+      background-color: #0f242d;
+      margin: 10% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content-form input,
+    .modal-content-form textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+
+    .modal-content-form .btn-upit {
+      width: 50%;
+      margin-top: 10px;
+    }
+
+    .close-form {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
     }
   </style>
 </head>
@@ -193,27 +245,74 @@
     <h2>Kontakt</h2>
     <p>📞 Telefon: <strong>+385 92 151 1159</strong></p>
     <p>✉️ E-mail: <strong>miklesarstvo@gmail.com</strong></p>
-    <a href="#" class="btn-upit">Pošaljite upit</a>
+    <button id="btnPoruka" class="btn-upit">Pošaljite poruku</button>
   </div>
 
   <footer>© 2025 MI-KLESARSTVO | Sva prava pridržana</footer>
 
-  <script>
-    // Dohvati sve slike iz galerije
-    var slikeGalerija = document.querySelectorAll(".galerija img");
+  <!-- Modal forma -->
+  <div id="modalForm" class="modal-form">
+    <div class="modal-content-form">
+      <span class="close-form">&times;</span>
+      <h2>Pošaljite poruku</h2>
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Vaše ime" required><br><br>
+        <input type="email" name="email" placeholder="Vaš email" required><br><br>
+        <textarea name="message" placeholder="Vaša poruka" rows="5" required></textarea><br><br>
+        <button type="submit" class="btn-upit">Pošalji</button>
+      </form>
+      <p id="formStatus"></p>
+    </div>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    // Povećanje slika galerije
+    var slikeGalerija = document.querySelectorAll(".galerija img");
     slikeGalerija.forEach(function(img){
       img.addEventListener("click", function(){
-        // Ako slika već ima klasu 'povecana', ukloni je
         if(this.classList.contains("povecana")){
           this.classList.remove("povecana");
         } else {
-          // Ukloni 'povecana' sa svih slika
           slikeGalerija.forEach(s => s.classList.remove("povecana"));
-          // Dodaj 'povecana' na kliknutu sliku
           this.classList.add("povecana");
         }
       });
+    });
+
+    // Otvaranje i zatvaranje modal forme
+    var modalForm = document.getElementById("modalForm");
+    var btnPoruka = document.getElementById("btnPoruka");
+    var closeForm = document.getElementsByClassName("close-form")[0];
+
+    btnPoruka.onclick = function() {
+      modalForm.style.display = "block";
+    }
+    closeForm.onclick = function() {
+      modalForm.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if(event.target == modalForm){
+        modalForm.style.display = "none";
+      }
+    }
+
+    // Inicijalizacija EmailJS
+    emailjs.init("TVOJ_USER_ID"); // zamijeni sa svojim user ID
+
+    document.getElementById("contactForm").addEventListener("submit", function(event){
+      event.preventDefault();
+      var formStatus = document.getElementById("formStatus");
+      
+      emailjs.sendForm("TVOJ_SERVICE_ID", "TVOJ_TEMPLATE_ID", this)
+        .then(function(){
+          formStatus.innerText = "Poruka je poslana!";
+          document.getElementById("contactForm").reset();
+          setTimeout(() => { modalForm.style.display = "none"; formStatus.innerText = ""; }, 3000);
+        }, function(error){
+          formStatus.innerText = "Došlo je do pogreške. Pokušajte ponovno.";
+          console.log("EmailJS error:", error);
+        });
     });
   </script>
 </body>
