@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="hr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MI-KLESARSTVO</title>
   <style>
     :root {
       --tamno-plava: #0b1e26;
       --maslinasto-zelena: #2e4735;
       --kamen-siva: #d4d4d4;
-      --svijetlo-siva: #eeeeee;
       --naglasak: #5a7c69;
+      --tamno-siva: #09171b;
     }
 
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
       margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
       background-color: var(--tamno-plava);
       color: var(--kamen-siva);
     }
@@ -24,66 +24,39 @@
       background: linear-gradient(180deg, var(--maslinasto-zelena), var(--tamno-plava));
       color: white;
       text-align: center;
-      padding: 40px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      padding: 50px 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
     header h1 {
       margin: 0;
-      font-size: 2.7em;
+      font-size: 2.8em;
       letter-spacing: 2px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
     }
 
     header p {
-      font-size: 1.1em;
-      color: #cfd8d4;
       margin-top: 10px;
-    }
-
-    .slider {
-      position: relative;
-      max-width: 100%;
-      height: 450px;
-      overflow: hidden;
-      border-bottom: 4px solid var(--naglasak);
-    }
-
-    .slides {
-      display: flex;
-      width: 35%;
-      animation: slide 20s infinite;
-    }
-
-    .slides img {
-      width: 100%;
-      height: 450px;
-      object-fit: cover;
-      filter: brightness(85%);
-    }
-
-    @keyframes slide {
-      0% { transform: translateX(0%); }
-      50% { transform: translateX(-100%); }
-      100% { transform: translateX(0%); }
+      color: #cfd8d4;
+      font-size: 1.1em;
     }
 
     section {
-      padding: 50px 25px;
+      padding: 50px 20px;
       text-align: center;
       background-color: #122d38;
     }
 
-    section:nth-child(even) {
+    section:nth-of-type(even) {
       background-color: #183a46;
     }
 
     section h2 {
-      font-size: 2em;
       color: var(--naglasak);
-      margin-bottom: 25px;
       text-transform: uppercase;
       letter-spacing: 1px;
+      font-size: 1.8em;
+      margin-bottom: 20px;
     }
 
     section p {
@@ -94,16 +67,34 @@
       color: #e1e1e1;
     }
 
+    /* Galerija */
+    .galerija {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+      padding: 40px;
+      background-color: #0f242d;
+    }
+
+    .galerija img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .galerija img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
     .kontakt {
       background: linear-gradient(180deg, var(--maslinasto-zelena), var(--tamno-plava));
       color: #fff;
-      padding: 40px 20px;
+      padding: 50px 20px;
       text-align: center;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
-    }
-
-    .kontakt h2 {
-      color: var(--kamen-siva);
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
     }
 
     .kontakt p {
@@ -111,17 +102,6 @@
       font-size: 1.1em;
     }
 
-    footer {
-      text-align: center;
-      background-color: #09171b;
-      color: #ccc;
-      padding: 20px 0;
-      font-size: 0.9em;
-      letter-spacing: 0.5px;
-      border-top: 1px solid #333;
-    }
-
-    /* Gumb */
     .btn-upit {
       display: inline-block;
       margin-top: 25px;
@@ -137,51 +117,68 @@
     .btn-upit:hover {
       background-color: #4b6857;
     }
+
+    footer {
+      text-align: center;
+      background-color: var(--tamno-siva);
+      color: #ccc;
+      padding: 20px 0;
+      font-size: 0.9em;
+      letter-spacing: 0.5px;
+      border-top: 1px solid #333;
+    }
   </style>
 </head>
 <body>
-
   <header>
     <h1>MI-KLESARSTVO</h1>
-    <p>Obrada kamena — kvaliteta i preciznost</p>
+    <p>Tradicionalna obrada kamena — preciznost, kvaliteta i povjerenje</p>
   </header>
-
-  <div class="slider">
-    <div class="slides">
-    <img src="images/IMG-20250723-WA0004.jpg" alt="Klesarski rad">
-    </div>
-  </div>
 
   <section>
     <h2>O nama</h2>
     <p>
-    Izrada kamenih proizvoda po mjeri — kvaliteta i tradicija u svakom detalju.
+      MI-KLESARSTVO je obiteljski obrt s dugogodišnjim iskustvom u obradi i oblikovanju kamena.
+      Naš rad odlikuju preciznost, kvaliteta i osjećaj za detalj. Kombiniramo tradicionalne metode s modernim alatima
+      kako bismo isporučili proizvode koji traju generacijama.
     </p>
   </section>
 
   <section>
     <h2>Naša ponuda</h2>
-    <p>➤ Kameni stolovi i klupe — izrađeni s pažnjom prema detaljima i prirodnim uzorcima kamena</p>
-    <p>➤ Potprozornjaci, stepenice i obloge — precizna izrada i ugradnja</p>
+    <p>➤ Kameni stolovi i klupe — ručna izrada s prirodnim uzorcima kamena</p>
+    <p>➤ Potprozornjaci, stepenice i obloge — precizna izrada i dugotrajnost</p>
     <p>➤ Kameni satovi i dekorativni elementi — unikatni dizajn</p>
-    <p>➤ Spomenici i nadgrobni elementi — izrada po želji kupca uz mogućnost personalizacije</p>
-    <p>➤ Ostali kameni proizvodi po narudžbi — sve prema vašim idejama i mjerama</p>
+    <p>➤ Spomenici i nadgrobni elementi — izrada po mjeri i želji kupca</p>
+    <p>➤ Ostali kameni proizvodi po narudžbi — prema vašim idejama i potrebama</p>
+  </section>
+
+  <section>
+    <h2>Galerija radova</h2>
+    <div class="galerija">
+      <img src="IMG-20250723-WA0003.jpg" alt="Rad 1" />
+      <img src="IMG-20250723-WA0004.jpg" alt="Rad 2" />
+      <img src="IMG-20251015-WA0047.jpg" alt="Rad 3" />
+      <img src="IMG-20251015-WA0048.jpg" alt="Rad 4" />
+      <img src="IMG-20251015-WA0051.jpg" alt="Rad 5" />
+      <img src="IMG-20251015-WA0052.jpg" alt="Rad 6" />
+      <img src="IMG-20251015-WA0054.jpg" alt="Rad 7" />
+      <img src="IMG-20251015-WA0056.jpg" alt="Rad 8" />
+      <img src="IMG-20251015-WA0059.jpg" alt="Rad 9" />
+      <img src="IMG-20251015-WA0060.jpg" alt="Rad 10" />
+      <img src="IMG-20251015-WA0063.jpg" alt="Rad 11" />
+      <img src="IMG-20251015-WA0064.jpg" alt="Rad 12" />
+    </div>
   </section>
 
   <div class="kontakt">
     <h2>Kontakt</h2>
-    <p>📞 Telefon: <strong>+385 91 123 4567</strong></p>
-    <p>✉️ E-mail: <strong>info@mi-klesarstvo.hr</strong></p>
-    <p>📍 Adresa:</p>
-
+    <p>📞 Telefon: <strong>+385 92 151 1159</strong></p>
+    <p>✉️ E-mail: <strong>miklesarstvo@gmail.com</strong></p>
+    <p>📍 Adresa: Split, Hrvatska</p>
     <a href="#" class="btn-upit">Pošaljite upit</a>
   </div>
 
-  <footer>
-    © 2025 MI-KLESARSTVO | 
-  </footer>
-
+  <footer>© 2025 MI-KLESARSTVO | Sva prava pridržana</footer>
 </body>
 </html>
-
-
